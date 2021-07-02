@@ -1,0 +1,15 @@
+{
+  "name": "puv-auth-logs-processor",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "description": "authAdmin logs processing",
+  "main": "analyze.js",
+  "scripts": {
+    "extract": "node src/extract.js",
+    "analyze": "node src/analyze.js"
+  },
+  "keywords": ["data-science"],
+  "author": "mishamyrt",
+  "license": "MIT"
+}
