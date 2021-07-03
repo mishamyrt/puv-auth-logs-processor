@@ -2,6 +2,40 @@
 import { readLines } from './common.js'
 
 /**
+ * Finds most popular item in array
+ * @template T
+ * @param {Array<T>} names 
+ * @returns {[T, number]}
+ */
+function findPopularElement(names) {
+  /**
+   * @type {Map<T, number>}
+   */
+  const entrtiesCount = new Map()
+
+  for (let i = 0; i < names.length; i++) {
+    if (entrtiesCount.has(names[i])) {
+      entrtiesCount.set(
+        names[i],
+        entrtiesCount.get(names[i]) + 1
+      )
+    } else {
+      entrtiesCount.set(names[i], 1)
+    }
+  }
+
+  let value
+  let count = 0
+  entrtiesCount.forEach((c, v) => {
+    if (c > count) {
+      value = v
+      count = c
+    }
+  })
+  return [value, count];
+}
+
+/**
  * Checks if item is unique
  * @param {string} value 
  * @param {number} index 
@@ -15,7 +49,7 @@ function onlyUnique(value, index, self) {
  * Extracts hours from time string
  * @param {string} time 
  */
-function getHours (time) {
+function getHours(time) {
   // Date is random, just for transform
   const date = new Date(Date.parse(`2011-10-10T${time}`))
   return date.getHours()
@@ -41,6 +75,7 @@ async function main(path) {
     results[key] = {
       users: hourResults[key].filter(onlyUnique).length,
       tokenRequests: hourResults[key].length,
+      maxRequests: findPopularElement(hourResults[key])
     }
   }
   console.table(results)
