@@ -56,12 +56,12 @@ async function rmf(path) {
 async function main(path, outPath) {
   const files = await getFiles(path)
   await rmf(outPath)
-  for (const name of files) {
-    console.log(`Processing ${name}`)
-    const lines = await readLines(join(path, name))
+  for (let i = 0; i < files.length; i++) {
+    console.log(`Processing ${files[i]}`)
+    const lines = await readLines(join(path, files[i]))
     let fileResults = ''
-    for (const line of lines) {
-      const match = line.match(ACCESS_RE)
+    for (let j = 0; j < lines.length; j++) {
+      const match = lines[j].match(ACCESS_RE)
       if (match) {
         fileResults += `${match[1]},${match[2]}\n`
       }
