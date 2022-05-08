@@ -57,7 +57,7 @@ async function main(path, outPath) {
   const files = await getFiles(path)
   await rmf(outPath)
   for (let i = 0; i < files.length; i++) {
-    console.log(`Processing ${files[i]}`)
+    console.log(`Processing ${files[i]} (${i+1} from ${files.length})`)
     const lines = await readLines(join(path, files[i]))
     let fileResults = ''
     for (let j = 0; j < lines.length; j++) {
